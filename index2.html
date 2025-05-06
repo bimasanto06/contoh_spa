@@ -1,0 +1,66 @@
+<html>
+<head>
+
+  <title>contoh</title>
+  <style>
+  
+    nav {
+      background: #93977e;
+      padding: 10px;
+    }
+
+    nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #121804;
+    }
+
+    nav a.active {
+      font-weight: bold;
+      color: blue;
+    
+    }
+
+    #app {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#halaman1" onclick="navigate('halaman1')">Beranda</a>   
+    <a href="#halaman2" onclick="navigate('halaman2')">Tentang</a> 
+    <a href="#halaman3" onclick="navigate('halaman3')">Kontak</a> 
+  </nav>
+
+  <div id="app"></div>
+  
+  <script>
+    const routes = {
+      halaman1: "<h1>Beranda</h1><p>Selamat datang di halaman beranda.</p>",
+      halaman2: "<h1>Tentang</h1><p>Ini adalah halaman tentang kami.</p>",
+      halaman3: "<h1>Kontak</h1><p>Silakan hubungi kami di email ini</p>"
+    };
+
+    function navigate(route) {
+      window.location.hash = route; 
+      render(); 
+    }
+
+    function render() {
+      const hash = window.location.hash.substring(1) || "halaman1"; 
+      const content = routes[hash] || "<h1>Halaman tidak ditemukan</h1>"; 
+      document.getElementById("app").innerHTML = content; 
+
+     
+      document.querySelectorAll("nav a").forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href").substring(1) === hash);
+      });
+    }
+
+  
+  </script>
+
+</body>
+</html>
